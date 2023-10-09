@@ -661,10 +661,10 @@ const creatures = [
   },
   {
     id: 56,
-    name: "Robo-Spider",
-    hp_range: "200-300",
+    name: "Dwemer-Spider",
+    hp_range: "20-40",
     velocity: "Fast",
-    basic_attack: "Mechanical Bite (30-50 damage)",
+    basic_attack: "Hit (5-10 damage)",
     attack_range: "Melee",
     relative_difficulty: "Low",
     area: "Technology",
@@ -672,3 +672,45 @@ const creatures = [
     other_skills: "Web Shooter (immobilizes players)",
   },
 ];
+
+function showMonsters() {
+  const myDiv = document.createElement("div");
+  for (let i = 0; i < creatures.length; i++) {
+    const creature = creatures[i];
+    // Create a div element to hold information about the creature
+    const creatureDiv = document.createElement("div");
+    creatureDiv.classList.add("creature-card"); // You can style this class with CSS
+    // Create paragraphs for each attribute and add them to the creatureDiv
+    const nameParagraph = document.createElement("h3");
+    nameParagraph.textContent = `${creature.id} .  ${creature.name}`;
+    creatureDiv.appendChild(nameParagraph);
+    const hpParagraph = document.createElement("p");
+    hpParagraph.textContent = `HP Range: ${creature.hp_range}`;
+    creatureDiv.appendChild(hpParagraph);
+    const velocityParagraph = document.createElement("p");
+    velocityParagraph.textContent = `Velocity: ${creature.velocity}`;
+    creatureDiv.appendChild(velocityParagraph);
+    const basicAttackParagraph = document.createElement("p");
+    basicAttackParagraph.textContent = `Basic Attack: ${creature.basic_attack}`;
+    creatureDiv.appendChild(basicAttackParagraph);
+    const attackRangeParagraph = document.createElement("p");
+    attackRangeParagraph.textContent = `Attack Range: ${creature.attack_range}`;
+    creatureDiv.appendChild(attackRangeParagraph);
+    const difficultyParagraph = document.createElement("p");
+    difficultyParagraph.textContent = `Relative Difficulty: ${creature.relative_difficulty}`;
+    creatureDiv.appendChild(difficultyParagraph);
+    const areaParagraph = document.createElement("p");
+    areaParagraph.textContent = `Area: ${creature.area}`;
+    creatureDiv.appendChild(areaParagraph);
+    const isBossParagraph = document.createElement("p");
+    isBossParagraph.textContent = `Is Boss: ${creature.is_boss ? "Yes" : "No"}`;
+    creatureDiv.appendChild(isBossParagraph);
+    const otherSkillsParagraph = document.createElement("p");
+    otherSkillsParagraph.textContent = `Other Skills: ${creature.other_skills}`;
+    creatureDiv.appendChild(otherSkillsParagraph);
+    // Append the creatureDiv to the main container
+    myDiv.appendChild(creatureDiv);
+  }
+  // Append the main container to the document
+  document.body.appendChild(myDiv);
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Game Title</title>
+  </head>
+  <body>
+    <!-- Add a button that calls the function when clicked -->
+    <button onclick="openImage('i_waterfall.jpg')">Open Waterfall Image</button>
+    <button onclick="openImage('1.jpg')">Open Map</button>
+    <button onclick="openImage('i_castle.jpg')">Open Castle I Image</button>
+    <button onclick="openImage('i_abandoned.jpg')">Open Abandoned Image</button>
+    <button onclick="openImage('i_hunt.jpg')">Open Hunt Image</button>
+    <button onclick="openImage('i_tech.jpg')">Open Tech island Image</button>
+    <button onclick="openImage('i_hunt.jpg')">Open Hunt island Image</button>
+    <hr />
+
+    <button onclick="showLevelInfo(0)">show techno I info</button>
+    <button onclick="showLevelInfo(1)">show hell I info</button>
+    <button onclick="showLevelInfo(2)">show waterfall info</button>
+    <button onclick="showMonsters()">Monsters</button>
+    <hr />
+
+    <!-- Add a button to remove elements -->
+    <button onclick="removeElements()">Remove Elements</button>
+    <hr />
+
+    <!-- Add a div element to display the random number -->
+    <div id="randomNumber"></div>
+    <!-- Add a button to generate a random number -->
+    <button onclick="generateRandomNumber()">Generate Random Number</button>
+    <hr />
+
+    <!-- Include Creatures.js -->
+    <script src="Creatures.js"></script>
+    <!-- Include Levels.js -->
+    <script src="Levels.js"></script>
+    <!-- Include Script.js -->
+    <script src="Script.js"></script>
+
+    <!-- Define the generateRandomNumber() function -->
+    <script>
+      function generateRandomNumber() {
+        var randomNumber = Math.floor(Math.random() * 100) + 1;
+        document.getElementById("randomNumber").innerHTML =
+          "Random Number: " + randomNumber;
+      }
+    </script>
+    <script>
+      function removeElements() {
+        var lastHr = document.querySelectorAll("hr:last-of-type")[0];
+        var nextElement = lastHr.nextElementSibling;
+        while (nextElement) {
+          nextElement.remove();
+          nextElement = lastHr.nextElementSibling;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -95,6 +95,32 @@ class Zone {
     } catch {}
     return line1 + line2 + line3 + line4 + "<hr />";
   }
+
+  static createZonesFromString(data) {
+    const lines = data.split("\n");
+    const zones = [];
+
+    // Remove lines without the "|" character
+    const validLines = lines.filter((line) => line.includes("|"));
+
+    for (const line of validLines) {
+      const parts = line.split("|").map((item) => item.trim());
+      const id = parseInt(parts[0]);
+      const title = parts[1];
+      const description = parts[2];
+      const connections = parts[3]
+        ? parts[3].split(",").map((item) => parseInt(item.trim()))
+        : [];
+      const possibleEncounters = parts[4]
+        ? parts[4].split(",").map((item) => item.trim())
+        : [];
+      zones.push(
+        new Zone([id, title, description, connections, possibleEncounters])
+      );
+    }
+
+    return zones;
+  }
 }
 
 ///////////////////////////////////////////////////
@@ -235,142 +261,39 @@ function showEncountersNicely() {
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 
-const z1 = new Zone([
-  1,
-  "Dock",
-  "A simple dock, connecting the shore and the sea.",
-  [2, 3],
-  [],
-]);
+let zz = `
+1	|	Dock	|	A Simple dock, peaceful sea.	|	2, 3, 4, 5	|	 
+2	|	Under the Dock	|	Exploring under the dock.	|	1	|	 
+3	|	Storage room	|	Storage for boat equipment.	|	1, 4, 5	|	 
+4	|	Cabin one	|	Cabin with an automata.	|	1, 3, 5	|	 
+5	|	Cabin two	|	Spacious cabin with a mirror.	|	4, 6	|	 
+6	|	Cabin three	|	Cabin in disarray, hints at a struggle.	|	5, 7, 8, 9	|	 
+7	|	Cabin Four	|	Locked cabin with muffled sounds.	|	5, 6, 8, 9	|	 
+8	|	Structure	|	Location of the last fight.	|	-	|	 
+9	|	Jungle fall	|	Hidden waterfall in the dense jungle.	|	10, 11, 8	|	 
+10	|	Jungle one	|	Dense jungle with teeming wildlife.	|	9, 11	|	 
+11	|	Jungle two	|	Mysterious jungle with ancient ruins.	|	9, 10, 14	|	 
+12	|	Jungle Inhabitants dungeon	|	A prison you are taken is captured by the tribal people	|	13	|	 
+13	|	Jungle Inhabitants city	|	A city with tribal people, very unlikely to beat, you must scape	|	12, 14, 15	|	 
+14	|	Jungle Inhabitants outskirts	|	Filled with archer towers and maybe some guardian animals	|	11, 13	|	 
+15	|	Jungle Inhabitants King Room	|	A room with the tribal king, guarded by his strongest champions; it is a divine place, so city people cannot enter.	|	13	|	 
+16	|	Grotesque Laboratory	|	A grotesque lab with terrifying experiments on creatures.	|	-	|	 
+17	|	Underground Forest 1	|	Larvae Swamp	|	-	|	 
+18	|	Underground Forest 2	|	Eel river	|	-	|	 
+19	|	Underground Forest 3, 4, 5	|	Dense Forest. Be wary, you could get lost.	|	-	|	 
+20	|	Underground Forest 8, 7, 6	|	A giagantic lake, which end cannot be seen	|	-	|	 
+`;
+let TechIslandZones = Zone.createZonesFromString(zz);
+console.log(TechIslandZones);
 
-const z2 = new Zone([
-  2,
-  "Under the Dock",
-  "The players look under the dock to find something",
-  [1],
-  [],
-]);
-
-const z3 = Zone.createByString(
-  `3
-  Storage Room
-  Storage for apparently boat equipment.
-  1, 4, 5`
-);
-
-const z4 = Zone.createByString(
-  `4
-  Cabin one
-  Cabin with an automata.
-  1, 3, 5`
-);
-const z5 = Zone.createByString(
-  `5
-  Cabin two
-  Spacious cabin with a mirror.
-  4, 6`
-);
-const z6 = Zone.createByString(
-  `6
-  Cabin three
-  Cabin in disarray, hints at a struggle.
-  5, 7, 8, 9`
-);
-const z7 = Zone.createByString(
-  `7
-  Cabin Four
-  Locked cabin with muffled sounds.
-  5, 6, 8, 9`
-);
-const z8 = Zone.createByString(
-  `8
-  Structure
-  Location of the last fight.
-  -`
-);
-const z9 = Zone.createByString(
-  `9
-  Jungle fall
-  Hidden waterfall in the dense jungle. With chance of falling.
-  10, 11, 8`
-);
-const z10 = Zone.createByString(
-  `10
-  Jungle one
-  Dense jungle with teeming wildlife.
-  9, 11`
-);
-const z11 = Zone.createByString(
-  `11
-  Jungle two
-  Mysterious jungle with ancient ruins.
-  9, 10, 14`
-);
-const z12 = Zone.createByString(
-  `12
-  Jungle Inhabitants dungeon
-  A prison you are taken is captured by the tribal people
-  13`
-);
-const z13 = Zone.createByString(
-  `13
-  Jungle Inhabitants city
-  A city with tribal people, very unlikely to beat, you must scape
-  12, 14, 15`
-);
-const z14 = Zone.createByString(
-  `14
-  Jungle Inhabitants outskirts
-  Filled with archer towers and maybe some guardian animals
-  11, 13`
-);
-const z15 = Zone.createByString(
-  `15
-  Jungle Inhabitants King Room
-  A room with the tribal king, guarded by his strongest champions; it is a divine place, so city people cannot enter.
-  13`
-);
-const z16 = Zone.createByString(
-  `16
-  Grotesque Laboratory
-  A grotesque lab with terrifying experiments on creatures.
-  -`
-);
-const z17 = Zone.createByString(
-  `17
-  Underground Forest 1
-  Larvae Swamp
-  -`
-);
-const z18 = Zone.createByString(
-  `18
-  Underground Forest 2
-  Eel river
-  -`
-);
-const z19 = Zone.createByString(
-  `19
-  Underground Forest 3, 4, 5
-  Dense Forest. Be wary, you could get lost.
-  -`
-);
-const z20 = Zone.createByString(
-  `20
-  Underground Forest 8, 7, 6
-  A giagantic lake, which end cannot be seen
-  -`
-);
-
-///////////////////////////////////////////////////
-
-z1.setEncounters([
+TechIslandZones[0].setEncounters([
   GSE("0-no", 0.6),
   GSE("10-notice", 0.3),
   GSE("8-beast", 0.05),
   GSE("9-beast", 0.05),
 ]);
 
-z2.setEncounters([
+TechIslandZones[1].setEncounters([
   GSE("0-no", 0.3),
   GSE("0-loot", 0.3),
   GSE("0-junk", 0.3),
@@ -378,34 +301,6 @@ z2.setEncounters([
   GSE("9-beast", 0.05),
 ]);
 
-///////////////////////////////////////////////////
-
-const TechIslandZones = [
-  z1,
-  z2,
-  z3,
-  z4,
-  z5,
-  z6,
-  z7,
-  z8,
-  z9,
-  z10,
-  z11,
-  z12,
-  z13,
-  z14,
-  z15,
-  z16,
-  z17,
-  z18,
-  z19,
-  z20,
-];
-
-///////////////////////////////////////////////////
-
-showEncountersNicely();
 let html = "";
 TechIslandZones.forEach((zone) => {
   html += zone.getHTMLToShow();

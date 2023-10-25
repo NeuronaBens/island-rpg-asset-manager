@@ -238,6 +238,7 @@ const eprov = `
 5-situation | scape the drowning | the water is rising, you are about to drawn, scape solving the puzzle.
 6-situation | random positive | if the heroes do something intelligent related to the zone, something happens.
 7-situation | random negative | if the heroes do something stupid related to the zone, something happens.
+8-situation | towers firing arrows | You have towers with people on them firing arrows at you.
 0-boss | Apollos Herald | The final boss of some possesed island.
 `;
 
@@ -363,9 +364,26 @@ TechIslandZones[10].setEncounters([
 ]);
 TechIslandZones[11].setEncounters([GSE("4-humanally"), GSE("2-utility")]);
 
-TechIslandZones[12].setEncounters([]);
-TechIslandZones[13].setEncounters([GSE("0-no", 0.1)]);
-TechIslandZones[14].setEncounters([]);
+TechIslandZones[12].setEncounters([
+  GSE("0-situation", 0.25), 
+  GSE("1-situation", 0.25), 
+  GSE("2-situation", 0.25), 
+  GSE("3-situation", 0.25), 
+  GSE("6-situation", 0), 
+  GSE("7-situation", 0),
+]);
+TechIslandZones[13].setEncounters([
+  GSE("0-no", 0.1), 
+  GSE("8-situation", 0.9), 
+  GSE("0-no", 1.4), 
+  GSE("2-beast", 1.2), 
+  GSE("3-animals", 1.2), 
+  GSE("11-techbeast", 1.2),
+]);
+TechIslandZones[14].setEncounters([
+  GSE("11-techbeast", 0.5),
+  GSE("2-humanenemy", 0.5),
+]);
 TechIslandZones[15].setEncounters([]);
 TechIslandZones[16].setEncounters([]);
 TechIslandZones[17].setEncounters([]);

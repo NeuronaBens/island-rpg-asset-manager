@@ -48,7 +48,7 @@ class SpecificEncounter {
   getHTMLToShow() {
     const html = `
       <div class="specific-encounter">
-        <h3>${this.encounter.enemy} - <span>Chance: ${this.chance}%</span></h3>
+        <h3>${this.encounter.enemy} - <span>Chance: ${this.chance}</span></h3>
         <p>${this.encounter.description}</p>
       </div>
     `;
@@ -154,6 +154,7 @@ const eprov = `
 6-loot | Ship loot | Loot that may improve the current ship, or give reparations to it.
 7-loot | Common pit with dressed people | A common pit with the corpses dressed with their original attires.
 8-loot |     cursed relic |     a cursed relic relative to the current zone of the current zone.
+9-loot | Diary | A Diary left out in the found place, perfect to understand what has happened.
 0-junk | rotten corpse (unlootable) | A corpse with nothing useful on it.
 1-junk | Naked bodies Pit | A common pit of bodies that are already looted or undressed for some reason.
 2-junk | Random Junk | A random junk find, relative to the zone.
@@ -206,20 +207,38 @@ const eprov = `
 7-beast |     Bake Kujira |     An encounter with a supernatural entity, often a ghostly whale.
 8-beast |     Sirens |     Sirens sing to confuse the enemy and drag them down to the sea, or grab them and pull them to drown.
 9-beast |     Sea Serpent beast |     A giant sea serpent that jumps out of water to eat enemies.
+10-beast | Elk Tiger | A Tiger with Elk Antlers big as both animals fused together.
 0-humanally | Survivor | A survivor relative to the current zone, or closeby zones.
 1-humanally | Wounded Warrior | A warrior wounded by a fight relative to the current zone, or closeby zones.
 2-humanally | town person | A town person that lives relative to the current zone, or closeby zones.
 3-humanally | town people | A group of people that live relative to the current zone, or closeby zones.
 4-humanally |     translator |     a translator for the relative language of the current zone.
+5-humanally | lost Explorer | a lost explorer of the jungle, already knowing some secrets and useful information.
 0-humanenemy | Tribal warrior | A tribal warrior that lives relative to the current zone, or closeby zones.
 1-humanenemy | Tribal warriors | tribal warriors crew that live relative to the current zone, or closeby zones.
 2-humanenemy | Tribal Champion | A tribal Champion (because of strength) that lives relative to the current zone, or closeby zones.
+3-humanenemy | Ambush by Tribal hunters | Tribal hunters ambush the players, causing great damage at start, sometimes paralysing, and if beating capturing.
 0-trap | pit | A hole in which if one falls, it is difficult to come out.
 1-trap | Spider Web | A Giant Spider Web, that traps the players.
 2-trap | Electrocution trap | A trap that electrocutes player upon activation (entering, level pulling, etc).
+3-trap | falling down | because of some natural or zone related feature you fall down.
+4-trap | booby trap | a trap normally on the jungle that captures the heroes.
 0-plant |     toxic Fungi |     a toxic fungi relative of the current zone.
 1-plant |     glowing mushrooms |     gloowing mushrooms with some cool properties on alchemy.
 2-plant |     Carnivorous Plant |     A plant that very unsuspectly grabs the players to eat them.
+3-plant | poisonous Plants | A patch of very poisonous plants, can make players intoxicated if in bad luck, also usefull for potions.
+0-utility | Forge | A forge usable by a blacksmith.
+1-utility | Misterious Altar | Useful to perform dark rituals more powerfully.
+2-utility | small sewers | sewers perfect for scaping a dungerous place, chance of toxic if used.
+0-situation | be wary (night) | it is night time, you come out of a place unoticed, there are guards of some kind, be sneaky.
+1-situation | the chase (night) | it is night time, you come out of a place noticed, run!
+2-situation | be wary (day) | it is daylight, you come out of a place unoticed, there are guards of some kind, be extremly sneaky.
+3-situation | the chase (day) | it is daylight, you come out of a place, noticed, run!
+4-situation | walls closing | the walls are closing, run!
+5-situation | scape the drowning | the water is rising, you are about to drawn, scape solving the puzzle.
+6-situation | random positive | if the heroes do something intelligent related to the zone, something happens.
+7-situation | random negative | if the heroes do something stupid related to the zone, something happens.
+0-boss | Apollos Herald | The final boss of some possesed island.
 `;
 
 const encounters = Encounter.mapData(eprov);
@@ -270,7 +289,7 @@ let zz = `
 6	|	Cabin three	|	Cabin in disarray, hints at a struggle.	|	5, 7, 8, 9	|	 
 7	|	Cabin Four	|	Locked cabin with muffled sounds.	|	5, 6, 8, 9	|	 
 8	|	Structure	|	Location of the last fight.	|	-	|	 
-9	|	Jungle fall	|	Hidden waterfall in the dense jungle.	|	10, 11, 8	|	 
+9	|	Jungle fall	|	Hidden waterfall in the dense jungle. By wary you may fall.	|	10, 11, 8	|	 
 10	|	Jungle one	|	Dense jungle with teeming wildlife.	|	9, 11	|	 
 11	|	Jungle two	|	Mysterious jungle with ancient ruins.	|	9, 10, 14	|	 
 12	|	Jungle Inhabitants dungeon	|	A prison you are taken is captured by the tribal people	|	13	|	 
@@ -286,13 +305,14 @@ let zz = `
 let TechIslandZones = Zone.createZonesFromString(zz);
 console.log(TechIslandZones);
 
+///////////////////////////////////////////////////
+
 TechIslandZones[0].setEncounters([
   GSE("0-no", 0.6),
   GSE("10-notice", 0.3),
   GSE("8-beast", 0.05),
   GSE("9-beast", 0.05),
 ]);
-
 TechIslandZones[1].setEncounters([
   GSE("0-no", 0.3),
   GSE("0-loot", 0.3),
@@ -300,6 +320,60 @@ TechIslandZones[1].setEncounters([
   GSE("8-beast", 0.05),
   GSE("9-beast", 0.05),
 ]);
+TechIslandZones[2].setEncounters([
+  GSE("0-no", 0.2),
+  GSE("6-loot", 0.2),
+  GSE("7-loot", 0.2),
+  GSE("1-junk", 0.2),
+  GSE("2-junk", 0.2),
+]);
+TechIslandZones[3].setEncounters([GSE("0-techbeast", 1), GSE("2-trap", 0.3)]);
+TechIslandZones[4].setEncounters([GSE("0-no", 0.5), GSE("4-beast", 0.5)]);
+TechIslandZones[5].setEncounters([
+  GSE("0-no", 0.2),
+  GSE("9-loot", 0.4),
+  GSE("1-humanally", 0.4),
+]);
+TechIslandZones[6].setEncounters([
+  GSE("0-no", 0.5),
+  GSE("2-techbeast", 1.8),
+  GSE("0-utility", 0.5),
+]);
+TechIslandZones[7].setEncounters([
+  GSE("8-techbeast", 1),
+  GSE("8-notice", 1),
+  GSE("9-notice", 1),
+  GSE("0-boss", 1),
+]);
+TechIslandZones[8].setEncounters([GSE("0-no", 0.8), GSE("3-trap", 0.2)]);
+TechIslandZones[9].setEncounters([
+  GSE("0-no", 0.25),
+  GSE("3-plant", 0.25),
+  GSE("10-beast", 0.25),
+  GSE("1-utility", 0.25),
+]);
+TechIslandZones[10].setEncounters([
+  GSE("0-no", 0.25),
+  GSE("3-humanenemy", 0.2),
+  GSE("1-animals", 0.1),
+  GSE("0-beast", 0.05),
+  GSE("5-humanally", 0.2),
+  GSE("8-loot", 0.1),
+  GSE("4-trap", 0.1),
+]);
+TechIslandZones[11].setEncounters([GSE("4-humanally"), GSE("2-utility")]);
+
+TechIslandZones[12].setEncounters([]);
+TechIslandZones[13].setEncounters([GSE("0-no", 0.1)]);
+TechIslandZones[14].setEncounters([]);
+TechIslandZones[15].setEncounters([]);
+TechIslandZones[16].setEncounters([]);
+TechIslandZones[17].setEncounters([]);
+TechIslandZones[18].setEncounters([GSE("0-no", 0.1)]);
+TechIslandZones[19].setEncounters([]);
+
+//Lost Explorer, Cursed Relic, Booby Traps, Ambush by Jungle Inhabitants, Owlbear, Wolf pack
+///////////////////////////////////////////////////
 
 let html = "";
 TechIslandZones.forEach((zone) => {

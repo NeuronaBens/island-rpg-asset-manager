@@ -18,4 +18,8 @@ function openTechImages() {
     image.src = imagePath + fileName;
     container.appendChild(image);
   });
+
+  const p = document.createElement("p");
+  p.innerHTML = "the automata says: 'Bienvenidos a la isla de vuestro principe Levatario Meslaboreo, Bendecido de Apolo; su majestad les da la bienvenida, y les quiere recompenzar por la visita. A la derecha verán una puerta, la puerta muestra un panel donde, si demuestran tener la sabiduría, serán recompensados, de otra forma, no estan invitados a seguir en este reino.'";
+  container.appendChild(p);
 }

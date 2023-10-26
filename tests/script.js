@@ -332,14 +332,14 @@ TechIslandZones[2].setEncounters([
 TechIslandZones[3].setEncounters([GSE("0-techbeast", 1), GSE("2-trap", 0.3)]);
 TechIslandZones[4].setEncounters([GSE("0-no", 0.5), GSE("4-beast", 0.5)]);
 TechIslandZones[5].setEncounters([
-  GSE("0-no", 0.2),
-  GSE("9-loot", 0.4),
   GSE("1-humanally", 0.4),
+  GSE("9-loot", 0.4),
+  GSE("0-no", 0.2),
 ]);
 TechIslandZones[6].setEncounters([
+  GSE("0-utility", 0.5),
   GSE("0-no", 0.5),
   GSE("2-techbeast", 1.8),
-  GSE("0-utility", 0.5),
 ]);
 TechIslandZones[7].setEncounters([
   GSE("8-techbeast", 1),
@@ -349,22 +349,24 @@ TechIslandZones[7].setEncounters([
 ]);
 TechIslandZones[8].setEncounters([GSE("0-no", 0.8), GSE("3-trap", 0.2)]);
 TechIslandZones[9].setEncounters([
+  GSE("1-utility", 0.25),
   GSE("0-no", 0.25),
   GSE("3-plant", 0.25),
   GSE("10-beast", 0.25),
-  GSE("1-utility", 0.25),
 ]);
 TechIslandZones[10].setEncounters([
+  GSE("5-humanally", 0.2),
+  GSE("8-loot", 0.1),
   GSE("0-no", 0.25),
   GSE("3-humanenemy", 0.2),
   GSE("1-animals", 0.1),
   GSE("0-beast", 0.05),
-  GSE("5-humanally", 0.2),
-  GSE("8-loot", 0.1),
   GSE("4-trap", 0.1),
 ]);
-TechIslandZones[11].setEncounters([GSE("4-humanally"), GSE("2-utility")]);
-
+TechIslandZones[11].setEncounters([
+  GSE("4-humanally", 0.5),
+  GSE("2-utility", 0.5),
+]);
 TechIslandZones[12].setEncounters([
   GSE("0-situation", 0.25),
   GSE("1-situation", 0.25),
@@ -377,9 +379,9 @@ TechIslandZones[13].setEncounters([
   GSE("0-no", 0.1),
   GSE("8-situation", 0.9),
   GSE("0-no", 1.4),
-  GSE("2-beast", 1.2),
   GSE("3-animals", 1.2),
   GSE("11-techbeast", 1.2),
+  GSE("2-beast", 1.2),
 ]);
 TechIslandZones[14].setEncounters([
   GSE("11-techbeast", 0.5),
@@ -389,22 +391,22 @@ TechIslandZones[15].setEncounters([
   GSE("4-techbeast", 0.33),
   GSE("5-techbeast", 0.33),
   GSE("6-techbeast", 0.33),
+  GSE("0-no", 1.6),
   GSE("9-techbeast", 1.2),
   GSE("10-techbeast", 1.2),
-  GSE("0-no", 1.6),
 ]);
 TechIslandZones[16].setEncounters([GSE("16-animals", 1)]);
 TechIslandZones[17].setEncounters([GSE("11-animals", 1)]);
 TechIslandZones[18].setEncounters([
+  GSE("1-plant", 0.1),
   GSE("0-no", 0.05),
+  GSE("0-plant", 0.1),
   GSE("14-animals", 0.1),
   GSE("15-animals", 0.1),
   GSE("1-beast", 0.15),
   GSE("3-beast", 0.1),
   GSE("4-beast", 0.15),
   GSE("5-beast", 0.1),
-  GSE("0-plant", 0.1),
-  GSE("1-plant", 0.1),
 ]);
 TechIslandZones[19].setEncounters([GSE("6-beast", 0.5), GSE("7-beast", 0.5)]);
 

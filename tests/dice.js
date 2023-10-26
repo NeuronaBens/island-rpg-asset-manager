@@ -57,6 +57,7 @@ class DiceRoller {
   setupDiceContainer() {
     //configure here
     this.diceContainer.innerHTML = "";
+    this.buttonContainer.innerHTML = "";
     this.createCleanDicesButton();
     this.createAddDiceButton(6);
     this.createAddDiceButton(20);

@@ -174,6 +174,7 @@ const eprov = `
 13-animals | Giant Spider | A abnormally big spider.
 14-animals |     Giant Frog |     A frog that is abnormally big, capable of using his tong to eat humans, for example.
 15-animals |     Jumping Larvea |     Larvaes on the trees or walls, that jump to attack the players, suking their blood.
+16-animals | Swamp Larvae | larvae that live on very grotesque swamps.
 0-notice | Notice secret zone | The player notice entrance to a secret zone
 1-notice | Notice secret trapdoor | The players notice a secret trap door.
 2-notice | Notice secret door | The players notice a secret door.
@@ -201,7 +202,7 @@ const eprov = `
 1-beast |     Spider Wolf |     A spider with wolf teeth and spider reflexes, jumps and size of a wolf, horrid creature.
 2-beast |     Giant Ground Worm |     A Giant Ground Worm the size of a house, very difficult to kill. 
 3-beast |     Aswang (shapeshifter) |     Encounter with a shapeshifting creature with sinister intentions.
-4-beast |     Phatom |     A spectral ghost of some king, previously human or similar.
+4-beast |     Phantom |     A spectral ghost of some king, previously human or similar.
 5-beast |     Tall Hairless Biped	 |     Encounter with a tall, hairless humanoid with unknown motives.
 6-beast |     Tentacle Deformity |     An entity or creature with unnatural, tentacle-like appendages.
 7-beast |     Bake Kujira |     An encounter with a supernatural entity, often a ghostly whale.
@@ -282,26 +283,26 @@ function showEncountersNicely() {
 ///////////////////////////////////////////////////
 
 let zz = `
-1	|	Dock	|	A Simple dock, peaceful sea.	|	2, 3, 4, 5	|	 
-2	|	Under the Dock	|	Exploring under the dock.	|	1	|	 
-3	|	Storage room	|	Storage for boat equipment.	|	1, 4, 5	|	 
-4	|	Cabin one	|	Cabin with an automata.	|	1, 3, 5	|	 
-5	|	Cabin two	|	Spacious cabin with a mirror.	|	4, 6	|	 
-6	|	Cabin three	|	Cabin in disarray, hints at a struggle.	|	5, 7, 8, 9	|	 
-7	|	Cabin Four	|	Locked cabin with muffled sounds.	|	5, 6, 8, 9	|	 
-8	|	Structure	|	Location of the last fight.	|	-	|	 
-9	|	Jungle fall	|	Hidden waterfall in the dense jungle. By wary you may fall.	|	10, 11, 8	|	 
-10	|	Jungle one	|	Dense jungle with teeming wildlife.	|	9, 11	|	 
-11	|	Jungle two	|	Mysterious jungle with ancient ruins.	|	9, 10, 14	|	 
-12	|	Jungle Inhabitants dungeon	|	A prison you are taken is captured by the tribal people	|	13	|	 
-13	|	Jungle Inhabitants city	|	A city with tribal people, very unlikely to beat, you must scape	|	12, 14, 15	|	 
-14	|	Jungle Inhabitants outskirts	|	Filled with archer towers and maybe some guardian animals	|	11, 13	|	 
-15	|	Jungle Inhabitants King Room	|	A room with the tribal king, guarded by his strongest champions; it is a divine place, so city people cannot enter.	|	13	|	 
-16	|	Grotesque Laboratory	|	A grotesque lab with terrifying experiments on creatures.	|	-	|	 
-17	|	Underground Forest 1	|	Larvae Swamp	|	-	|	 
-18	|	Underground Forest 2	|	Eel river	|	-	|	 
-19	|	Underground Forest 3, 4, 5	|	Dense Forest. Be wary, you could get lost.	|	-	|	 
-20	|	Underground Forest 8, 7, 6	|	A giagantic lake, which end cannot be seen	|	-	|	 
+0	|	Dock	|	A Simple dock, peaceful sea.	|	2, 3, 4, 5	|	 
+1	|	Under the Dock	|	Exploring under the dock.	|	1	|	 
+2	|	Storage room	|	Storage for boat equipment.	|	1, 4, 5	|	 
+3	|	Cabin one	|	Cabin with an automata.	|	1, 3, 5	|	 
+4	|	Cabin two	|	Spacious cabin with a mirror.	|	4, 6	|	 
+5	|	Cabin three	|	Cabin in disarray, hints at a struggle.	|	5, 7, 8, 9	|	 
+6	|	Cabin Four	|	Locked cabin with muffled sounds.	|	5, 6, 8, 9	|	 
+7	|	Structure	|	Location of the last fight.	|	-	|	 
+8	|	Jungle fall	|	Hidden waterfall in the dense jungle. By wary you may fall.	|	10, 11, 8	|	 
+9 |	Jungle one	|	Dense jungle with teeming wildlife.	|	9, 11	|	 
+10	|	Jungle two	|	Mysterious jungle with ancient ruins.	|	9, 10, 14	|	 
+11	|	Jungle Inhabitants dungeon	|	A prison you are taken is captured by the tribal people	|	13	|	 
+12	|	Jungle Inhabitants city	|	A city with tribal people, very unlikely to beat, you must scape	|	12, 14, 15	|	 
+13	|	Jungle Inhabitants outskirts	|	Filled with archer towers and maybe some guardian animals	|	11, 13	|	 
+14	|	Jungle Inhabitants King Room	|	A room with the tribal king, guarded by his strongest champions; it is a divine place, so city people cannot enter.	|	13	|	 
+15	|	Grotesque Laboratory	|	A grotesque lab with terrifying experiments on creatures.	|	-	|	 
+16	|	Underground Forest 1	|	Larvae Swamp	|	-	|	 
+17	|	Underground Forest 2	|	Eel river	|	-	|	 
+18	|	Underground Forest 3, 4, 5	|	Dense Forest. Be wary, you could get lost.	|	-	|	 
+19	|	Underground Forest 8, 7, 6	|	A giagantic lake, which end cannot be seen	|	-	|	 
 `;
 let TechIslandZones = Zone.createZonesFromString(zz);
 console.log(TechIslandZones);
@@ -365,30 +366,47 @@ TechIslandZones[10].setEncounters([
 TechIslandZones[11].setEncounters([GSE("4-humanally"), GSE("2-utility")]);
 
 TechIslandZones[12].setEncounters([
-  GSE("0-situation", 0.25), 
-  GSE("1-situation", 0.25), 
-  GSE("2-situation", 0.25), 
-  GSE("3-situation", 0.25), 
-  GSE("6-situation", 0), 
+  GSE("0-situation", 0.25),
+  GSE("1-situation", 0.25),
+  GSE("2-situation", 0.25),
+  GSE("3-situation", 0.25),
+  GSE("6-situation", 0),
   GSE("7-situation", 0),
 ]);
 TechIslandZones[13].setEncounters([
-  GSE("0-no", 0.1), 
-  GSE("8-situation", 0.9), 
-  GSE("0-no", 1.4), 
-  GSE("2-beast", 1.2), 
-  GSE("3-animals", 1.2), 
+  GSE("0-no", 0.1),
+  GSE("8-situation", 0.9),
+  GSE("0-no", 1.4),
+  GSE("2-beast", 1.2),
+  GSE("3-animals", 1.2),
   GSE("11-techbeast", 1.2),
 ]);
 TechIslandZones[14].setEncounters([
   GSE("11-techbeast", 0.5),
   GSE("2-humanenemy", 0.5),
 ]);
-TechIslandZones[15].setEncounters([]);
-TechIslandZones[16].setEncounters([]);
-TechIslandZones[17].setEncounters([]);
-TechIslandZones[18].setEncounters([GSE("0-no", 0.1)]);
-TechIslandZones[19].setEncounters([]);
+TechIslandZones[15].setEncounters([
+  GSE("4-techbeast", 0.33),
+  GSE("5-techbeast", 0.33),
+  GSE("6-techbeast", 0.33),
+  GSE("9-techbeast", 1.2),
+  GSE("10-techbeast", 1.2),
+  GSE("0-no", 1.6),
+]);
+TechIslandZones[16].setEncounters([GSE("16-animals", 1)]);
+TechIslandZones[17].setEncounters([GSE("11-animals", 1)]);
+TechIslandZones[18].setEncounters([
+  GSE("0-no", 0.05),
+  GSE("14-animals", 0.1),
+  GSE("15-animals", 0.1),
+  GSE("1-beast", 0.15),
+  GSE("3-beast", 0.1),
+  GSE("4-beast", 0.15),
+  GSE("5-beast", 0.1),
+  GSE("0-plant", 0.1),
+  GSE("1-plant", 0.1),
+]);
+TechIslandZones[19].setEncounters([GSE("6-beast", 0.5), GSE("7-beast", 0.5)]);
 
 //Lost Explorer, Cursed Relic, Booby Traps, Ambush by Jungle Inhabitants, Owlbear, Wolf pack
 ///////////////////////////////////////////////////
